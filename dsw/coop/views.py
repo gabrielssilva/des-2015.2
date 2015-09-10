@@ -1,21 +1,22 @@
 from django.shortcuts import render
+from django.views.generic import CreateView, ListView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
+from django.core.urlresolvers import reverse_lazy
+
+from coop.models import User
 
 #Initial page
-def index(request):
-	return render_to_response("index.html")
+def home(request):
+	return render(request, "index.html")
 
 #Page for register user
-def register(request):
+class Register(CreateView):
+	template_name = 'register.html'
+	model = User
+	success_url = reverse_lazy('list')
 
-	if request.method=='POST':
-		form = UserCreationForm(request.POST)
-
-		if form.is_valid():
-			form.save()
-			return HttpResponseRedirect("/login")
-		else:
-			return render(request, "register.html", {"form": form})
-
-	return render(request, "register.html", {"form": UserCreationForm()})
+class List(ListView):
+	template_name = 'list.html'
+	model = User
+	context_object = 'name'

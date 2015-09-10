@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <h1>Lista de Usuarios</h1>
+
+                <table>
+                        <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Telefone</th
+                        </tr>
+                {% for name in object_list %}
+                        <tr>
+                                <td>{{ nome.name }}</td>
+                                <td>{{ nome.email }}</td>
+                        </tr>
+                {% empty %}
+                        <li>Sem itens na lista.</li>
+                {% endfor %}
+                </table>
+{% endblock content %}
