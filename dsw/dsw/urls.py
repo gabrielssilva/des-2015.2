@@ -15,11 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
-from coop.views import *
 
 urlpatterns = patterns('coop.views',
-	url(r'^$', 'home', name= 'home'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^register/$', Register.as_view(), name='register'),
-    url(r'^list/$', List.as_view(), name='list'),
+    #url(r'^register/$', Register.as_view(), name='register'),
+    #url(r'^list/$', List.as_view(), name='list'),
+    url(r'^coop/', include('coop.urls')),
 )
