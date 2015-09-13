@@ -7,15 +7,14 @@
                         <tr>
                                 <th>Nome</th>
                                 <th>Email</th>
-                                <th>Telefone</th
                         </tr>
-                {% for name in object_list %}
+                {% for user in object_list %}
                         <tr>
-                                <td>{{ nome.name }}</td>
-                                <td>{{ nome.email }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.email }}</td>
                         </tr>
                 {% empty %}
-                        <li>Sem itens na lista.</li>
+                        <li>Sem usuários cadastrados.</li>
                 {% endfor %}
                 </table>
 {% endblock content %}

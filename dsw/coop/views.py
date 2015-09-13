@@ -13,6 +13,7 @@ def home(request):
 #Page for register user
 class Register(CreateView):
 	template_name = 'register.html'
+	fields = ['name', 'email', 'password']
 	model = User
 	success_url = reverse_lazy('list')
 
