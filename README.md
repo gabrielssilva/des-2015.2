@@ -29,4 +29,4 @@ python manage.py runserver
 
 ## Mais informações
 
-Informações a respeito da documentação do projeto podem ser encontradas na [Wiki do projeto](https://github.com/gabrielssilva/des-2015.2/wiki).
+Informações a respeito da documentação do projeto podem ser encontradas na [Wiki](https://github.com/gabrielssilva/des-2015.2/wiki).
