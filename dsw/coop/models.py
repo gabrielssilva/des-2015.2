@@ -1,4 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
@@ -7,9 +8,10 @@ class User(models.Model):
 		pass
 	def __str__(self):
 		return self.email
-	name = models.CharField(max_length=100)
-	email = models.CharField(max_length=50)
-	password = models.CharField(max_length=50)
+	nome = models.CharField(max_length=100)
+	email = models.EmailField()
+	senha = models.CharField(max_length=50)
+	telefone = PhoneNumberField()
 
 	class Meta:
 		verbose_name = (u'name')
