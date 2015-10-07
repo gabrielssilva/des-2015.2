@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse_lazy
 from forms import PlayerForm
 from forms import AuthenticationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.shortcuts import render
 from coop.models import Player
 
@@ -15,34 +15,32 @@ def homeLogged(request):
 
 def login(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST) # Veja a documentacao desta funcao
+        email = request.POST['email']
+        password = request.POST['password']
         
-        if form.is_valid():
-            #se o formulario for valido significa que o Django conseguiu encontrar o usuario no banco de dados
-            #agora, basta logar o usuario
-            login(request, form.get_model())
-            return HttpResponseRedirect("logged_index.html") # redireciona o usuario logado para a pagina inicial
-        else:
-            return render(request, "login.html", {"form": form})
-    
-    #se nenhuma informacao for passada, exibe a pagina de login com o formulario
+        user = authenticate(email=email, password=password)
+
+        if user and user.is_active:
+            auth_login(request, user)
+            return render(request, "index.html")
     
     return render(request, "login.html", {"form": AuthenticationForm()})
 
 
+def logout(request):
+    auth_logout(request)
+    return render(request, "index.html")
+
 
 def register(request):
-    registered = False
-
     if request.method == 'POST':
         form = PlayerForm(data=request.POST)
 
         if form.is_valid():
+            # Need refactoring... Should be saving on model
             player = form.save()
             player.set_password(player.password)
             player.save()
-            
-            registered = True
 
             return render(request, 'index.html')
         else:

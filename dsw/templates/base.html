@@ -9,15 +9,20 @@
         <div>
                 <ul>
                         <a href="{% url 'index' %}">Início</a>
-                        <a href="{% url 'register' %}">Cadastro </a>
                         <a href="{% url 'list' %}">Lista</a>
+
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout'%}">Logout</a>
+                        {% else %}
+                        <a href="{% url 'register' %}">Cadastro </a>
                         <a href="{% url 'login'%}">Login</a>
+                        {% endif %}
+
 
                 </ul>
         </div>
 
         {% block content %}
-
         {% endblock content %}
 </body>
 </html>

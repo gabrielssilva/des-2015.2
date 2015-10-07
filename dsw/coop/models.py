@@ -1,8 +1,16 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from phonenumber_field.modelfields import PhoneNumberField
 
-# Create your models here.
+
+class Manager(BaseUserManager):
+	def create_user(self, email, nome, telefone, senha):
+		# ...
+		pass
+
+	def create_superuser(self, email, nome, telefone, senha):
+		# We do not have super users...
+		pass
 
 class Player(AbstractBaseUser):
 	nome = models.CharField(max_length=100)
@@ -11,6 +19,8 @@ class Player(AbstractBaseUser):
 	telefone = PhoneNumberField()
 
 	USERNAME_FIELD = 'email'
+	REQUIRED_FIELDS = ['nome', 'telefone']
+	objects = Manager()
 
 	def __unicode__(self):
 		return self.name

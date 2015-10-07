@@ -10,6 +10,5 @@ class PlayerForm(forms.ModelForm):
         fields = ['email', 'password', 'nome', 'telefone']
 
 class AuthenticationForm(forms.Form):
-
-    nome = forms.CharField(max_length=254)
-    senha = forms.CharField(widget=forms.PasswordInput)
+    email = forms.CharField(max_length=254)
+    password = forms.CharField(widget=forms.PasswordInput)
