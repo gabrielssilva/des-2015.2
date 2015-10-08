@@ -22,5 +22,5 @@ urlpatterns = patterns('coop.views',
     #url(r'^register/$', Register.as_view(), name='register'),
     #url(r'^list/$', List.as_view(), name='list'),
     url(r'^coop/', include('coop.urls')),
-    url(r'^$', views.home, name='index'),
+    url(r'^$', views.Home.as_view(), name='index'),
 )

@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 
-
-{% endblock css %}
-
 {% block content %}
 
 	{% block css %}
@@ -14,8 +11,7 @@
 	  padding-bottom: 20px;
 	}
 	</style>
-        <center><h1>Coop</h1></center>
-        
+    {% endblock css %}
    
         <!-- Main jumbotron for a primary marketing message or call to action -->
   <body>
@@ -29,7 +25,7 @@
     <div class="container">
        <div>
                 <ul>
-                        a href="{% url 'index' %}">Início</a>
+                        <a href="{% url 'index' %}">Início</a>
                         <a href="{% url 'list' %}">Lista</a>
 
                         {% if user.is_authenticated %}
