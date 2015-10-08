@@ -1,4 +1,5 @@
 from django.db import models
+from coop.models import User
 
 class Game(models.Model):
 	class Admin:
