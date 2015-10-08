@@ -64,6 +64,7 @@ class Register(CreateView):
 	model = Player
 	success_url = reverse_lazy('list')
 
+#Page for list users
 class List(ListView):
 	template_name = 'list.html'
 	model = Player

@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+	{% block css %}
+		{{block.super}}
+		<style>
+		/* Move down content because we have a fixed navbar that is 50px tall */
+		body {
+		  padding-top: 50px;
+		  padding-bottom: 20px;
+		}
+		</style>
+		{% endblock css %}
+	    
         <center><h1>Coop</h1></center>
         <p>Olá, {{ user.nome}}.</p>
 {% endblock content %}
