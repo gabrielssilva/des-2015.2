@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from models import User
+from models import Player
 
-class UserForm(forms.ModelForm):
 
-        class Meta:
-                model = User
-                fields = ['name', 'email', 'password']
+class PlayerForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+    class Meta:
+        model = Player
+        fields = ['email', 'password', 'nome', 'telefone']
+
+class AuthenticationForm(forms.Form):
+    email = forms.CharField(max_length=254)
+    password = forms.CharField(widget=forms.PasswordInput)
