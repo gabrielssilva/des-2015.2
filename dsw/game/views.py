@@ -7,7 +7,7 @@ from django.views.generic import CreateView, ListView
 
 
 def create_game(request):
-	if request.method = 'POST':
+	if request.method == 'POST':
 		form = GameForm(data=request.POST)
 
 		if form.is_valid():
