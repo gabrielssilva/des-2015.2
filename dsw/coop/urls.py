@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^list/$', views.List.as_view(), name='list'),
     url(r'^login/$', views.Auth.login, name='login'),
     url(r'^logout/$', views.Auth.logout, name='logout'),
+    url(r'^$', views.homeLogged, name='logged_index'),
 ]

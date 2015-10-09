@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        {% block css %}
+                {{block.super}}
+                <style>
+                /* Move down content because we have a fixed navbar that is 50px tall */
+                body {
+                  padding-top: 50px;
+                  padding-bottom: 20px;
+                }
+                </style>
+        {% endblock css %}
+        <h1>Lista de Jogos</h1>
+
+                <table>
+                        <tr>
+                                <th>Nome</th>
+                                <th>Console</th>
+                                <th>Genero</th>
+                                <th>Linguagem</th>
+                                <th>Estado</th>
+                        </tr>
+                {% for user in object_list %}
+                        <tr>
+                                <td>{{ game.nome }}</td>
+                                <td>{{ game.console }}</td>
+                                <td>{{ game.genero }}</td>
+                                <td>{{ game.linguagem }}</td>
+                                <td>{{ game.estado }}</td>
+                        </tr>
+                {% empty %}
+                        <li>Sem usuários cadastrados.</li>
+                {% endfor %}
+                </table>
+{% endblock content %}
+
