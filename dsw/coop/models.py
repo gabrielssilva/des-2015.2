@@ -1,16 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser
 from phonenumber_field.modelfields import PhoneNumberField
+from coop.factory import PlayerFactory
 
-
-class Manager(BaseUserManager):
-	def create_user(self, email, nome, telefone, senha):
-		# ...
-		pass
-
-	def create_superuser(self, email, nome, telefone, senha):
-		# We do not have super users...
-		pass
 
 class Player(AbstractBaseUser):
 	nome = models.CharField(max_length=100)
@@ -20,7 +12,7 @@ class Player(AbstractBaseUser):
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['nome', 'telefone']
-	objects = Manager()
+	objects = PlayerFactory()
 
 	def __unicode__(self):
 		return self.name
@@ -31,4 +23,3 @@ class Player(AbstractBaseUser):
 	class Meta:
 		verbose_name = (u'name')
 		verbose_name_plural = (u'names')
-

@@ -58,3 +58,6 @@ target/
 
 # MacOs trash
 .DS_Store
+
+# Database
+db.sqlite3
