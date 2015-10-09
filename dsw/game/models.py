@@ -2,6 +2,7 @@ from django.db import models
 from coop.models import Player
 from datetime import datetime
 
+
 class Transaction(models.Model):
 	class Meta:
 		abstract = True
