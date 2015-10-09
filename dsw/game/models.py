@@ -12,18 +12,13 @@ class Transaction(models.Model):
 	data = models.DateTimeField()
 
 class Advertisement(Transaction):
-	
-
 	disponibilidade = models.CharField(max_length=30)
 
 
 class Game(models.Model):
-	class Admin:
-		pass
 	def __str__(self):
 		return self.name
 
-	
 	player_id = models.ForeignKey(Player)
 	nome = models.CharField(max_length=100)
 	console = models.CharField(max_length=20)
