@@ -10,45 +10,39 @@ from django.shortcuts import render
 from coop.models import Player
 
 
-def homeLogged(request):
-    return render(request, "logged_index.html")
+class Auth(object):
+    @staticmethod
+    def login(request):
+        if request.method == 'POST':
+            email = request.POST['email']
+            password = request.POST['password']
+            user = authenticate(email=email, password=password)
 
-def login(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        
-        user = authenticate(email=email, password=password)
+            if user and user.is_active:
+                auth_login(request, user)
+                return render(request, "index.html")
 
-        if user and user.is_active:
-            auth_login(request, user)
-            return render(request, "index.html")
-    
-    return render(request, "login.html", {"form": AuthenticationForm()})
+        return render(request, "login.html", {"form": AuthenticationForm()})
 
+    @staticmethod
+    def logout(request):
+        auth_logout(request)
+        return render(request, "index.html")
 
-def logout(request):
-    auth_logout(request)
-    return render(request, "index.html")
+    @staticmethod
+    def register(request):
+        if request.method == 'POST':
+            form = PlayerForm(data=request.POST)
 
-
-def register(request):
-    if request.method == 'POST':
-        form = PlayerForm(data=request.POST)
-
-        if form.is_valid():
-            # Need refactoring... Should be saving on model
-            player = form.save()
-            player.set_password(player.password)
-            player.save()
-
-            return render(request, 'index.html')
+            if form.is_valid():
+                Player.objects.create_user(form)
+                return render(request, 'index.html')
+            else:
+                print form.errors
         else:
-            print form.errors
-    else:
-        form = PlayerForm()
+            form = PlayerForm()
 
-    return render(request, 'register.html', {'form': form})
+        return render(request, 'register.html', {'form': form})
 
 
 
