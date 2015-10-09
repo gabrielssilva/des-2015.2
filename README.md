@@ -24,6 +24,7 @@ git clone https://github.com/gabrielssilva/des-2015.2.git
 A aplicação pode ser executada através do script _manage.py_
 
 ```
+python manage.py migrate
 python manage.py runserver
 ```
 
