@@ -1,6 +1,7 @@
 from django.db import models
 from coop.models import Player
 from datetime import datetime
+from dsw import settings
 
 
 class Transaction(models.Model):
@@ -18,7 +19,7 @@ class Game(models.Model):
 	def __str__(self):
 		return self.name
 
-	player_id = models.ForeignKey(Player)
+	player_id = models.ForeignKey(settings.AUTH_USER_MODEL)
 	nome = models.CharField(max_length=100)
 	console = models.CharField(max_length=20)
 	genero = models.CharField(max_length=30)

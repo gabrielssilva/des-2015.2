@@ -1,9 +1,8 @@
-{% extends 'base.html'%}
-
+{% extends 'base.html' %}
 
 {% block content %}
 		
-		<h1>Criar Anúncio</h1>
+		<h1>Criar Jogo</h1>
 
 	{% block css %}
 	{{block.super}}
@@ -18,12 +17,6 @@
         <form action="" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
-        <input type="submit" class="btn btn-success" value="criar anúncio" />
+                <input type="submit" class="btn btn-primary" value="Adicionar" />
 
-        {% if user.is_authenticated %}
-        <a class="btn btn-primary" href="{% url 'create_game'%}">adicionar Jogo</a>
-    {% endif %}
-
-
-    
-	{% endblock content %}
+{% endblock content %}
