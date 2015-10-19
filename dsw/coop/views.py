@@ -3,8 +3,8 @@ from django.views.generic import CreateView, ListView, TemplateView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse_lazy
-from forms import PlayerForm
-from forms import AuthenticationForm
+from .forms import PlayerForm
+from .forms import AuthenticationForm
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.shortcuts import render
 from coop.models import Player
@@ -38,7 +38,7 @@ class Auth(object):
                 Player.objects.create_user(form)
                 return render(request, 'index.html', {'login_form': AuthenticationForm()})
             else:
-                print form.errors
+                print(form.errors)
         else:
             form = PlayerForm()
 

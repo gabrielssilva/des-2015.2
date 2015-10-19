@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% block css %}
+{{block.super}}
+<style>
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 70px;
+  padding-bottom: 20px;
+}
+</style>
+{% endblock css %}
+
+<div class="container">
+    <h1>Criar Jogo</h1>
+    <br>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-primary" value="Adicionar" />
+    </form>
+</div>
+
+{% endblock content %}

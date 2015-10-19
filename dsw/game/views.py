@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from forms import GameForm, AdvertisementForm
+from .forms import GameForm, AdvertisementForm
 from coop.models import Player
 from game.models import Game, Advertisement
 from django.core.urlresolvers import reverse_lazy
@@ -18,7 +18,7 @@ def create_game(request):
 
 			return render(request, 'advertisement.html')
 		else:
-			print form.errors
+			print(form.errors)
 	else:
 		form = GameForm()
 
@@ -34,7 +34,7 @@ def advertisement(request):
 
 			return render(request, 'index.html')
 		else:
-			print form.errors
+			print(form.errors)
 	else:
 		form = AdvertisementForm()
 
