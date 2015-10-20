@@ -15,6 +15,7 @@ class GameForm(forms.ModelForm):
         }
 
 class AdvertisementForm(forms.ModelForm):
+    jogos = forms.ModelMultipleChoiceField(queryset=Game.objects.all(), widget=forms.SelectMultiple(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Advertisement

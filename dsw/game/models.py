@@ -17,7 +17,7 @@ class Advertisement(Transaction):
 
 class Game(models.Model):
 	def __str__(self):
-		return self.name
+		return self.nome
 
 	player_id = models.ForeignKey(settings.AUTH_USER_MODEL)
 	nome = models.CharField(max_length=100)
