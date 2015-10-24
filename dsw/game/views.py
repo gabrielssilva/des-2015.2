@@ -4,7 +4,7 @@ from coop.models import Player
 from .models import Game, Advertisement
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import View, CreateView, ListView
-from django.forms.models import modelformset_factory
+from django.forms.formsets import formset_factory
 
 
 # def advertisement(request):
@@ -28,10 +28,25 @@ class AdvertisementView(View):
 	http_method_names = [u'get', u'post']
 
 	def post(self, request):
+		GameFormSet = formset_factory(GameForm)
 		form = AdvertisementForm(data=request.POST)
+		game_formset = GameFormSet(data=request.POST)
+
+		advertisement = form.save()
+		for gameform in game_formset:
+			
+			game = gameform.save(commit=False)
+			game.player_id = request.user
+			game.save()
+			advertisement.games.add(game)
+
+		form = AdvertisementForm()
+		return render(request, 'advertisement.html', {'form': form, 'game_formset': GameFormSet})
 
 	def get(self, request):
-		return render(request, 'advertisement.html', {'form': AdvertisementForm()})
+		form = AdvertisementForm()
+		GameFormSet = formset_factory(GameForm)
+		return render(request, 'advertisement.html', {'form': form, 'game_formset': GameFormSet})
 
 
 class GameView(View):

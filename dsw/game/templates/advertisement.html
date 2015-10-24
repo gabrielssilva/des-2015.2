@@ -18,8 +18,15 @@ body {
 
     <form action="" method="POST">
         {% csrf_token %}
-        {{ formset.as_p }}
-        {{ form.as_p }}
+        {{ form }}
+
+        {{ game_formset.management_form }}
+        {% for gameform in game_formset %}
+            <br><br>
+            {{ gameform }}
+        {% endfor %}
+
+        
         <input type="submit" class="btn btn-success" value="Anunciar" />
 
         {% if user.is_authenticated %}

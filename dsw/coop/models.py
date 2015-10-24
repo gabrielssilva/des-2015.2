@@ -9,6 +9,7 @@ class Player(AbstractBaseUser):
 	email = models.EmailField(unique=True)
 	senha = models.CharField(max_length=50)
 	telefone = PhoneNumberField()
+	is_staff=True
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['nome', 'telefone']
