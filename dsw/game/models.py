@@ -4,17 +4,6 @@ from datetime import datetime
 from dsw import settings
 
 
-class Transaction(models.Model):
-	class Meta:
-		abstract = True
-
-	tipo = models.CharField(max_length = 30)
-	data = models.DateTimeField()
-
-class Advertisement(Transaction):
-	disponibilidade = models.CharField(max_length=30)
-
-
 class Game(models.Model):
 	def __str__(self):
 		return self.nome

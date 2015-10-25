@@ -1,37 +1,28 @@
 from django.shortcuts import render
-from .forms import GameForm, AdvertisementForm
+from .forms import GameForm
 from coop.models import Player
-from .models import Game, Advertisement
+from .models import Game
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import View, CreateView, ListView
 from django.forms.models import modelformset_factory
 
 
-# def advertisement(request):
+#def advertisement(request):
 # 	if request.method == 'POST':
 # 		form = AdvertisementForm(data=request.POST)
-
+#
 # 		if form.is_valid():
 # 			advertisement = form.save()
 # 			advertisement.save()
-
+#
 # 			return render(request, 'index.html')
 # 		else:
 # 			print(form.errors)
 # 	else:
 # 		form = AdvertisementForm()
-
 # 	return render(request, 'advertisement.html', {'form': form})
 
 
-class AdvertisementView(View):
-	http_method_names = [u'get', u'post']
-
-	def post(self, request):
-		form = AdvertisementForm(data=request.POST)
-
-	def get(self, request):
-		return render(request, 'advertisement.html', {'form': AdvertisementForm()})
 
 
 class GameView(View):
