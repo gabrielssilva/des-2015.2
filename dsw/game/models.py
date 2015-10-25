@@ -1,6 +1,5 @@
 from django.db import models
 from coop.models import Player
-from datetime import datetime
 from dsw import settings
 
 
