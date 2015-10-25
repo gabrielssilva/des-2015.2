@@ -5,6 +5,7 @@ from .models import Game, Advertisement
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import View, CreateView, ListView
 from django.forms.formsets import formset_factory
+from django.http import HttpResponse
 
 
 # def advertisement(request):
@@ -24,6 +25,17 @@ from django.forms.formsets import formset_factory
 # 	return render(request, 'advertisement.html', {'form': form})
 
 
+def new_game_form(request):
+	GameFormSet = formset_factory(GameForm)
+	form = AdvertisementForm(data=request.POST)
+	form_data = request.POST.copy()
+	print(form_data)
+	form_data['form-TOTAL_FORMS'] = int(form_data["form-TOTAL_FORMS"])+1
+	game_formset = GameFormSet(data=form_data)
+
+	return render(request, 'advertisement.html', {'form': form, 'game_formset': game_formset})
+
+
 class AdvertisementView(View):
 	http_method_names = [u'get', u'post']
 
@@ -34,7 +46,6 @@ class AdvertisementView(View):
 
 		advertisement = form.save()
 		for gameform in game_formset:
-			
 			game = gameform.save(commit=False)
 			game.player_id = request.user
 			game.save()
@@ -45,7 +56,7 @@ class AdvertisementView(View):
 
 	def get(self, request):
 		form = AdvertisementForm()
-		GameFormSet = formset_factory(GameForm)
+		GameFormSet = formset_factory(GameForm, extra=0)
 		return render(request, 'advertisement.html', {'form': form, 'game_formset': GameFormSet})
 
 
