@@ -5,6 +5,7 @@ from .models import Advertisement
 from django.views.generic import View
 from django.views.generic import CreateView, ListView
 from django.forms.formsets import formset_factory
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 class AdvertisementView(View):
@@ -23,18 +24,13 @@ class AdvertisementView(View):
 			advertisement.games.add(game)
 
 		form = AdvertisementForm()
-		return render(request, 'advertisement.html', {'form': form, 'game_formset': GameFormSet})
+		return HttpResponseRedirect('/advertisement/list_advertisiments')
 
 	def get(self, request):
 		form = AdvertisementForm()
 		GameFormSet = formset_factory(GameForm, extra=0)
 		return render(request, 'advertisement.html', {'form': form, 'game_formset': GameFormSet})
 
-
-class Advertisement(CreateView):
-	template_name = 'advertisement.html'
-	fields = ['data', 'tipo', 'disponibilidade']
-	model = Advertisement
 
 class List(ListView):
 	template_name = 'list_advertisements.html'
