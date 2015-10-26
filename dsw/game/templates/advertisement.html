@@ -29,12 +29,9 @@ body {
             {% endfor %}
         </div>
 
-        
-        <input type="submit" class="btn btn-success" value="Anunciar" />
-        <a class="add-form-btn" href="#">Add form</a>
-
         {% if user.is_authenticated %}
-            <a class="btn btn-primary" href="{% url 'create_game'%}">Adicionar Jogo</a>
+            <input type="submit" class="btn btn-success" value="Anunciar" />
+            <a class="add-form-btn btn btn-primary" href="#">Add Game</a>
         {% endif %}
     </for>
 </div>
