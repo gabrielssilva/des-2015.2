@@ -14,3 +14,13 @@ class AdvertisementForm(forms.ModelForm):
             'tipo': forms.TextInput(attrs={'class': 'form-control'}),
             'disponibilidade': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+SEARCH_OPTIONS = (
+    ('type', ('Tipo')),
+    ('availability', ('Disponibilidade')),
+)
+
+class SearchForm(forms.Form):
+    search_text = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    search_option = forms.ChoiceField(choices=SEARCH_OPTIONS, widget=forms.RadioSelect(attrs={'class': 'radio'}))
