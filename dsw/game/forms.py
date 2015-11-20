@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django import forms
 from .models import Game
 from coop.models import Player
@@ -14,7 +16,7 @@ CONSOLE = (
 )
 
 GENRE = (
-    ('01', ('Ação')),
+    ('01', (u'Ação')),
     ('02', ('Aventura')),
     ('03', ('FPS')),
     ('04', ('RPG')),

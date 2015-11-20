@@ -44,33 +44,25 @@ class List(ListView):
 
 	def post(self, request):
 		if (request.POST['search_option'] == 'type'):
-			search_strategy = TypeSearchStrategy(request.POST['search_text'])
-		elif (request.POST['search_option'][0] == 'availability'):
-			search_strategy = AvailabilitySearchStrategy(request.POST['search_text'])
+			search_strategy = SearchStrategy(Advertisement.objects, filter_by_type)
+		elif (request.POST['search_option'] == 'availability'):
+			search_strategy = SearchStrategy(Advertisement.objects, filter_by_availability)
 
-		self.object_list = self.filter(search_strategy)
+		self.object_list = search_strategy.filter_content(request.POST['search_text'])
 		return render(request, 'list_advertisements.html', {'search_form': SearchForm(), 'object_list': self.object_list})
-
-	def filter(self, search_strategy):
-		return search_strategy.filter_content()
 
 
 class SearchStrategy:
-	__metaclass__ = ABCMeta
+	def __init__(self, manager, filter_content):
+		self.manager = manager
+		SearchStrategy.filter_content = filter_content
 
-	def __init__(self, search_text):
-		self.search_text = search_text
-
-	@abstractmethod
 	def filter_content(self, search_text):
-		pass
+		return self.manager.all()
 
 
-class TypeSearchStrategy(SearchStrategy):
-	def filter_content(self):
-		return Advertisement.objects.filter(tipo__icontains=self.search_text)
+def filter_by_type(self, search_text):
+	return self.manager.filter(tipo__icontains=search_text)
 
-
-class AvailabilitySearchStrategy(SearchStrategy):
-	def filter_content(self):
-		return Advertisement.objects.filter(disponibilidade__icontains=self.search_text)
+def filter_by_availability(self, search_text):
+	return self.manager.filter(disponibilidade__icontains=search_text)
