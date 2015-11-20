@@ -70,4 +70,4 @@ def filter_by_availability(self, search_text):
 	return self.manager.filter(disponibilidade__icontains=search_text)
 
 def filter_by_game(self, search_text):
-	return self.manager.filter(game__nome__icontains=search_text)
+	return self.manager.filter(games__nome__icontains=search_text)

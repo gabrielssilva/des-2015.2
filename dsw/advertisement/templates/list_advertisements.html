@@ -32,7 +32,11 @@
                 <td>{{ advertisement.data }}</td>
                 <td>{{ advertisement.tipo }}</td>
                 <td>{{ advertisement.disponibilidade }}</td>
-                <td>{{ game.nome }}</td>
+                <td>
+                    {% for game in advertisement.games.all %}
+                        {{ game.nome }}
+                    {% endfor %}
+                </td>
             </tr>
         {% empty %}
                 <li>Sem anúncios cadastrados.</li>

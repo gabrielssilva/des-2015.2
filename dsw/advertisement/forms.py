@@ -4,21 +4,21 @@ from coop.models import Player
 from game.models import Game
 
 class AdvertisementForm(forms.ModelForm):
-    jogos = forms.ModelMultipleChoiceField(queryset=Game.objects.all(), widget=forms.SelectMultiple(attrs={'class': 'form-control'}))
-
     class Meta:
         model = Advertisement
-        fields = ['data', 'tipo', 'disponibilidade']
+        fields = ['data', 'tipo', 'disponibilidade', 'games']
         widgets = {
             'data': forms.TextInput(attrs={'class': 'form-control'}),
             'tipo': forms.TextInput(attrs={'class': 'form-control'}),
             'disponibilidade': forms.TextInput(attrs={'class': 'form-control'}),
+            'games': forms.SelectMultiple(attrs={'class': 'form-control'}),
         }
 
 
 SEARCH_OPTIONS = (
     ('type', ('Tipo')),
     ('availability', ('Disponibilidade')),
+    ('game', ('Jogo')),
 )
 
 class SearchForm(forms.Form):
