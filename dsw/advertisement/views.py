@@ -47,6 +47,8 @@ class List(ListView):
 			search_strategy = SearchStrategy(Advertisement.objects, filter_by_type)
 		elif (request.POST['search_option'] == 'availability'):
 			search_strategy = SearchStrategy(Advertisement.objects, filter_by_availability)
+		elif (request.POST['search_option'] == 'game'):
+			search_strategy = SearchStrategy(Advertisement.objects, filter_by_game)
 
 		self.object_list = search_strategy.filter_content(request.POST['search_text'])
 		return render(request, 'list_advertisements.html', {'search_form': SearchForm(), 'object_list': self.object_list})
@@ -66,3 +68,6 @@ def filter_by_type(self, search_text):
 
 def filter_by_availability(self, search_text):
 	return self.manager.filter(disponibilidade__icontains=search_text)
+
+def filter_by_game(self, search_text):
+	return self.manager.filter(game__nome__icontains=search_text)
