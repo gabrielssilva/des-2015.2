@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block css %}
+{{block.super}}
+<style>
+    /* Move down content because we have a fixed navbar that is 50px tall */
+    body {
+      padding-top: 50px;
+      padding-bottom: 20px;
+    }
+</style>
+{% endblock css %}
+
+<div class="container">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ search_form }}
+        <input type="submit" class="btn btn-success" value="Buscar" />
+    </form>
+
+    <h1>Lista de Anúncios</h1>
+    <table>
+        <tr>
+            <th>Data</th>
+            <th>Tipo</th>
+            <th>Disponibilidade</th>
+            <th>Jogo</th>
+        </tr>
+        {% for advertisement in object_list %}
+            <tr>
+                <td>{{ advertisement.data }}</td>
+                <td>{{ advertisement.tipo }}</td>
+                <td>{{ advertisement.disponibilidade }}</td>
+                <td>
+                    {% for game in advertisement.games.all %}
+                        {{ game.nome }}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% empty %}
+                <li>Sem anúncios cadastrados.</li>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}

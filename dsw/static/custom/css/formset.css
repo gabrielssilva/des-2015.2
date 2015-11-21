@@ -1,0 +1,9 @@
+.formset-item {
+    background-color: #5A6274;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 2em;
+    padding-left: 3em;
+    color: white;
+    border-radius: 4px;
+}

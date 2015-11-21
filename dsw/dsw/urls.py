@@ -23,4 +23,6 @@ urlpatterns = patterns('coop.views',
     #url(r'^list/$', List.as_view(), name='list'),
     url(r'^coop/', include('coop.urls')),
     url(r'^$', views.Home.as_view(), name='index'),
+    url(r'^game/', include('game.urls')),
+    url(r'^advertisement/', include('advertisement.urls')),
 )

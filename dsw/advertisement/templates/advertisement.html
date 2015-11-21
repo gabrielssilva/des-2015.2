@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+{% block content %}
+
+{% block css %}
+{{block.super}}
+<style>
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 70px;
+  padding-bottom: 20px;
+}
+</style>
+{% endblock css %}
+
+<div id="ad-form-container" class="container">
+    <h1>Criar Anúncio</h1>
+    <br>
+
+    <form id="ad-form" action="" method="POST">
+        {% csrf_token %}
+        {{ form }}
+
+        <div id="game-formset">
+            {{ game_formset.management_form }}
+            {% for gameform in game_formset %}
+                <div class="formset-item" >
+                    {{ gameform }}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if user.is_authenticated %}
+            <input type="submit" class="btn btn-success" value="Anunciar" />
+            <a class="add-form-btn btn btn-primary" href="#">adicionar jogo</a>
+        {% endif %}
+    </for>
+</div>
+
+
+
+{% endblock content %}

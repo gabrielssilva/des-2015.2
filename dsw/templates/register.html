@@ -2,7 +2,7 @@
 
 
 {% block content %}
-		
+		<div id="ad-form-container" class="container">
 		<h1>Cadastro de Clientes</h1>
 
 	{% block css %}
@@ -15,8 +15,10 @@
 	}
 	</style>
 	{% endblock css %}
+	
         <form action="" method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Cadastrar" />
+            {% csrf_token %}
+            {{ form.as_p }}
+        <input type="submit" value="Cadastrar" />
+
 {% endblock content %}
