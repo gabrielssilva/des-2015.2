@@ -68,6 +68,19 @@
 
 {% endblock navbar %}
 
+<div class="container alerts">
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <div {% if message.tags %} class="alert fade in alert-{{ message.tags }}"{% endif %}>
+        {{ message }}
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      </div>
+      {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
 {% block body %}
 
   <header>

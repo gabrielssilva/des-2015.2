@@ -79,6 +79,8 @@ WSGI_APPLICATION = 'dsw.wsgi.application'
 AUTH_USER_MODEL = 'coop.Player'
 
 
+APPEND_SLASH = True
+
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 

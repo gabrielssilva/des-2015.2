@@ -7,11 +7,14 @@ from django.views.generic import CreateView, ListView
 from django.forms.formsets import formset_factory
 from django.http import HttpResponseRedirect
 from abc import ABCMeta, abstractmethod
+from dsw.decorator import signed_in
+
 
 
 class AdvertisementView(View):
 	http_method_names = [u'get', u'post']
 
+	@signed_in
 	def post(self, request):
 		GameFormSet = formset_factory(GameForm)
 		form = AdvertisementForm(data=request.POST)
@@ -27,6 +30,7 @@ class AdvertisementView(View):
 		form = AdvertisementForm()
 		return HttpResponseRedirect('/advertisement/list_advertisiments')
 
+	@signed_in
 	def get(self, request):
 		form = AdvertisementForm()
 		GameFormSet = formset_factory(GameForm, extra=0)
